@@ -16,39 +16,25 @@ export default class App extends Component {
 
   refresh = async () => {
     try {
-      const data = await Promise.all(
+      const [word, phrasal] = await Promise.all(
         [
           this.getWord(),
           this.getPhrasal()
         ]
       )
-      const [word, phrasal] = data
       this.setState({ word, phrasal })
     } catch (err) {
       console.log(`refresh word error: ${err}`)
-      this.setState({
-        phrasal: {
-          en: "english phrasal",
-          pl: "polish phrasal",
-          example: "example of phrasal"
-        },
-        word: {
-          en: "word phrasal",
-          pl: "word phrasal",
-          explanation: "explanation of phrasal",
-          definition: "def"
-        }
-      })
     }
   }
 
   getWord = async () => {
-    const res = await axios.get('/random/word')
+    const res = await axios.get('/api/random/word')
     return res;
   }
 
   getPhrasal = async () => {
-    const res = await axios.get('/random/phrasal')
+    const res = await axios.get('/api/random/phrasal')
     return res;
   }
 
@@ -59,7 +45,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div class="App">
+      <div className="App">
         <Nav editViewHandler={() => console.log("Jestem kurwa")} />
         <Main phrasal={this.state.phrasal} word={this.state.word}></Main>
       </div>

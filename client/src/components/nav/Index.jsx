@@ -7,11 +7,9 @@ export default function Nav(props) {
     const speechOptions = ["on", "off"]
     return (
         <div className="Nav">
-            <ul>
-                <li><span>Settings</span></li>
-                <li><TreeItem editViewHandler={props.editViewHandler} items={refreshOptions}>Refresh</TreeItem></li>
-                <li><TreeItem editViewHandler={props.editViewHandler} items={speechOptions}>Speech</TreeItem></li>
-            </ul>
+            <span><span>Settings</span></span>
+            <span><TreeItem editViewHandler={props.editViewHandler} items={refreshOptions}>Refresh</TreeItem></span>
+            <span><TreeItem editViewHandler={props.editViewHandler} items={speechOptions}>Speech</TreeItem></span>
         </div>
     )
 }

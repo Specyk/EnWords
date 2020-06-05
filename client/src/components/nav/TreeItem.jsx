@@ -7,7 +7,7 @@ export default function TreeItem(props) {
                 {props.children}
             </div>
             <div className="hiddenTree">
-                {props.items.map(i => <li onClick={props.editViewHandler}>{i}</li>)}
+                {props.items.map((i, key) => <li key={key} onClick={props.editViewHandler}>{i}</li>)}
             </div>
         </div>
     )

@@ -12,16 +12,11 @@
   color: white;
 }
 
-.Nav ul {
-  display: flex;
-  flex-direction: row;
-}
-
 .Nav .hiddenTree {
   display: none;
 }
 
-.Nav li {
+.Nav span {
   list-style: none;
   padding: 0 2em;
 }
