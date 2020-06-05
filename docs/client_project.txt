@@ -1,0 +1,46 @@
+# Plan
+
+App
+    Topnav
+        Refresh >
+            All
+            Word
+            Phrasal
+        Speech (on/off)
+        Settings
+    ^ Main view |
+        Phrasal
+            example
+            pl
+            en
+        Word
+            description
+            en
+            pl
+    ^ Settings |
+    ^ Browse words |
+        Word list
+            Add new
+            Searchbox
+            List
+                Item
+                    Details
+                        pl
+                        en
+                        example
+                    Tools
+                        Edit
+                        Delete
+        Phrasal list
+            Add new
+            Searchbox
+            List
+                Item
+                    Details
+                        pl
+                        en
+                        example
+                    Tools
+                        Edit
+                        Delete
+

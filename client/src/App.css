@@ -1,0 +1,53 @@
+.App {
+  text-align: center;
+}
+
+.Nav {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  height: 3em;
+  width: 100%;
+  background-color: #222;
+  color: white;
+}
+
+.Nav ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.Nav .hiddenTree {
+  display: none;
+}
+
+.Nav li {
+  list-style: none;
+  padding: 0 2em;
+}
+
+.Main {
+  padding: 3em 0 0 0;
+  background-color: #555;
+  display: flex;
+  justify-content: center;
+}
+
+.Main div {
+  width: 30em;
+  padding: 1em;
+  color: #eee;
+}
+
+.Main .expression,
+.Main .word {
+  display: flex;
+}
+
+.Phrasal {
+  background-color: #003;
+}
+
+.Word {
+  background-color: #031;
+}
