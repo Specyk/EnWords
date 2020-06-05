@@ -16,4 +16,11 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+
+async function main() {
+    await mongoose.connect(process.env.MONGODB_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+    app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+}
