@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const express = require("express");
 const routesLoader = require('./routes/loader')
 
@@ -7,6 +8,12 @@ const PORT = process.env.SERVER_PORT
 const app = express();
 
 app.use('/', routesLoader('api', __dirname + '/routes/api'))
+
+app.get('/status', (req, res) => {
+    res.json({
+        word: 33
+    })
+})
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'client/build')));
@@ -24,3 +31,5 @@ async function main() {
     });
     app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 }
+
+main().then(() => console.log('Application configured properly')).catch(err => console.log(`Application error: ${err}`))

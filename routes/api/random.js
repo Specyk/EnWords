@@ -1,12 +1,13 @@
 const express = require('express')
 
 async function getWord() {
+    // TODO
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const word = {
                 en: "english",
                 pl: "polish",
-                explanation: "wyjasnienie",
+                definition: "definicja",
                 example: "przyklad"
             }
             resolve(word)
@@ -22,7 +23,7 @@ async function getPhrasal() {
                 pl: "polish",
                 example: "przyklad"
             }
-            resolve(word)
+            resolve(phrasal)
         }, 155);
     })
 }

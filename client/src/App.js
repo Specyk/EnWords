@@ -16,12 +16,14 @@ export default class App extends Component {
 
   refresh = async () => {
     try {
-      const [word, phrasal] = await Promise.all(
+      const responses = await Promise.all(
         [
           this.getWord(),
           this.getPhrasal()
         ]
       )
+      const [word, phrasal] = responses.map(r => r.data)
+
       this.setState({ word, phrasal })
     } catch (err) {
       console.log(`refresh word error: ${err}`)

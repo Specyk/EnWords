@@ -8,7 +8,7 @@ export default function Word({ data }) {
                 <div className="pl">{data.pl}</div>
             </div>
             <div className="definition">{data.definition}</div>
-            <div className="explanation">{data.explanation}</div>
+            <div className="example">{data.example}</div>
         </div>
     )
 }
