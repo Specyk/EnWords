@@ -6,4 +6,4 @@ const PhrasalSchema = mongoose.Schema({
     example: String
 })
 
-module.exports = mongoose.model('Phrasal', PhrasalSchema)
+module.exports = mongoose.model('phrasal', PhrasalSchema)
