@@ -1,31 +1,17 @@
 const express = require('express')
+const Phrasal = require('../../models/Phrasal')
 
 async function getRandom() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            const phrasal = {
-                en: "english",
-                pl: "polish",
-                example: "przyklad"
-            }
-            resolve(phrasal)
-        }, 155);
-    })
+    const count = await Phrasal.count()
+    const randomNum = Math.floor(Math.random() * count)
+    const randomItems = await Phrasal.find().skip(randomNum).limit(1)
+    return randomItems[0]
 }
 
 async function getAll() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            const phrasal = {
-                en: "english",
-                pl: "polish",
-                example: "przyklad"
-            }
-            resolve([phrasal])
-        }, 155);
-    })
+    const items = Phrasal.find({})
+    return items
 }
-
 
 const app = express.Router()
 

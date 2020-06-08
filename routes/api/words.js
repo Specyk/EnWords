@@ -1,35 +1,17 @@
 const express = require('express')
+const Word = require('../../models/Word')
 
 async function getRandom() {
-    // TODO
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            const word = {
-                en: "english",
-                pl: "polish",
-                definition: "definicja",
-                example: "przyklad"
-            }
-            resolve(word)
-        }, 155);
-    })
+    const count = await Word.count()
+    const randomNum = Math.floor(Math.random() * count)
+    const randomItems = await Word.find().skip(randomNum).limit(1)
+    return randomItems[0]
 }
 
 async function getAll() {
-    // TODO
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            const word = {
-                en: "english",
-                pl: "polish",
-                definition: "definicja",
-                example: "przyklad"
-            }
-            resolve([word])
-        }, 155);
-    })
+    const items = Word.find({})
+    return items
 }
-
 
 const app = express.Router()
 
@@ -38,7 +20,7 @@ app.get('/', async (req, res) => {
         res.json(await getAll())
     } catch (error) {
         console.log(error);
-        res.send('no products')
+        res.status(500).json({ message: 'Load db data error' })
     }
 })
 
@@ -47,7 +29,7 @@ app.get('/random', async (req, res) => {
         res.json(await getRandom())
     } catch (error) {
         console.log(error);
-        res.send('no products')
+        res.status(500).json({ message: 'Load db data error' })
     }
 })
 
