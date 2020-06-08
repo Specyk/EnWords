@@ -3,7 +3,7 @@ import Phrasal from './Phrasal'
 import Word from './Word'
 import '../../App.css'
 
-export default function Main({ word, phrasal }) {
+export default function Main({ phrasal, word }) {
     return (
         <div className="Main">
             <Phrasal data={phrasal} />
