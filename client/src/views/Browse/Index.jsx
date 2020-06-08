@@ -1,20 +1,16 @@
-import React, { Component } from './node_modules/react'
+import React, { Component } from 'react'
+
+import PhrasalList from './PhrasalList/Index'
+import WordList from './WordList/Index'
 
 export default class BrowseView extends Component {
     state = {
-        phrasals: [
-            {
-                pl: "polskie",
-                en: "angielskie",
-                example: "przykladowy phrasal"
-            }
-        ]
     }
     render() {
         return (
-            <div>
-                <PhrasalList phrasals={phrasals}></PhrasalList>
-                <WordList words={words}></WordList>
+            <div className='BrowseView'>
+                <PhrasalList></PhrasalList>
+                <WordList></WordList>
             </div>
         )
     }

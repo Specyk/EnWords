@@ -1,9 +1,29 @@
 import React, { Component } from 'react'
-import SearchBox from '../searchbox'
-import AddNew from './add_new'
-import List from './list'
+import axios from 'axios'
+
+import SearchBox from '../SearchBox'
+import AddNew from './AddNew'
+import List from './List'
 
 export default class PhrasalList extends Component {
+    state = {
+        phrasals: []
+    }
+
+    componentDidMount() {
+        this.update().then(() => { })
+    }
+
+    update = async () => {
+        const phrasals = await this.getPhrasals()
+        this.setState({ phrasals })
+    }
+
+    getPhrasals = async () => {
+        const res = await axios.get('/api/phrasals')
+        return res.data
+    }
+
     addNewHandler() {
 
     }
@@ -15,9 +35,9 @@ export default class PhrasalList extends Component {
     render() {
         return (
             <div>
-                <SearchBox searchHandler={searchHandler}></SearchBox>
-                <AddNew addNewHandler={addNewHandler}></AddNew>
-                <List phrasals={props.phrasals}></List>
+                <AddNew addNewHandler={this.addNewHandler}></AddNew>
+                <SearchBox searchHandler={this.searchHandler}></SearchBox>
+                <List phrasals={this.state.phrasals}></List>
             </div >
         )
     }
