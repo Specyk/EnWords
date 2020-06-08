@@ -4,7 +4,8 @@
 
 .Nav {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   position: fixed;
   height: 3em;
   width: 100%;
@@ -16,13 +17,36 @@
   display: none;
 }
 
-.Nav span {
-  list-style: none;
+.Nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.Nav li {
   padding: 0 2em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.Nav li:hover {
+  background-color: #001;
+}
+
+.Nav li.active {
+  background-color: #001;
+}
+
+.Nav > ul {
+  height: 100%;
+  display: flex;
+}
+
+.Nav ~ div {
+  padding: 3em 0 0 0;
 }
 
 .Main {
-  padding: 3em 0 0 0;
   background-color: #555;
   display: flex;
   justify-content: center;
@@ -45,4 +69,20 @@
 
 .Word {
   background-color: #031;
+}
+
+/* Browse View */
+
+.BrowseView {
+  display: flex;
+}
+
+.BrowseView div {
+  padding: 0.2em;
+}
+
+.BrowseView li {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-evenly;
 }

@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import axios from 'axios'
 
 import Nav from './components/nav/Index'
 import Main from './views/Main/Index'
+import Browse from './views/Browse/Index'
+import Settings from './views/Settings'
 
 export default class App extends Component {
   state = {
-    phrasal: {},
-    word: {}
+    phrasal: { en: "coś tam en" },
+    word: { en: "coś tam en" }
   }
 
   async componentDidMount() {
@@ -31,25 +34,37 @@ export default class App extends Component {
   }
 
   getWord = async () => {
-    const res = await axios.get('/api/random/word')
+    const res = await axios.get('/api/words/random')
     return res;
   }
 
   getPhrasal = async () => {
-    const res = await axios.get('/api/random/phrasal')
+    const res = await axios.get('/api/phrasals/random')
     return res;
   }
 
 
-  editViewHandler = (event) => {
-    console.log(`event = ${event}\ntarget = ${event.target}`)
+  editViewHandler = (e) => {
+    console.log(`event = ${e}\ntarget = ${e.target}`)
   }
 
   render() {
     return (
       <div className="App">
-        <Nav editViewHandler={() => console.log("Jestem kurwa")} />
-        <Main phrasal={this.state.phrasal} word={this.state.word}></Main>
+        <Router>
+          <Nav editViewHandler={() => console.log("Jestem kurwa")} />
+          <Switch>
+            <Route path="/" exact>
+              <Main word={this.state.word} phrasal={this.state.phrasal} />
+            </Route>
+            <Route path="/settings">
+              <Settings></Settings>
+            </Route>
+            <Route path="/browse">
+              <Browse></Browse>
+            </Route>
+          </Switch>
+        </Router>
       </div>
     )
   }
