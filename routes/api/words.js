@@ -1,6 +1,6 @@
 const express = require('express')
 
-async function getWord() {
+async function getRandom() {
     // TODO
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -15,33 +15,36 @@ async function getWord() {
     })
 }
 
-async function getPhrasal() {
+async function getAll() {
+    // TODO
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            const phrasal = {
+            const word = {
                 en: "english",
                 pl: "polish",
+                definition: "definicja",
                 example: "przyklad"
             }
-            resolve(phrasal)
+            resolve([word])
         }, 155);
     })
 }
 
+
 const app = express.Router()
 
-app.get('/word', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
-        res.json(await getWord())
+        res.json(await getAll())
     } catch (error) {
         console.log(error);
         res.send('no products')
     }
 })
 
-app.get('/phrasal', async (req, res) => {
+app.get('/random', async (req, res) => {
     try {
-        res.json(await getPhrasal())
+        res.json(await getRandom())
     } catch (error) {
         console.log(error);
         res.send('no products')
