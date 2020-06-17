@@ -1,18 +1,31 @@
-const mongoose = require('mongoose')
-const express = require("express");
-const routesLoader = require('./routes/loader')
-
 require('dotenv').config()
 const PORT = process.env.SERVER_PORT
 
+const mongoose = require('mongoose')
+const express = require("express");
+
+const routesLoader = require('./routes/loader')
+
+const loggerMiddleware = require('./middlewares/logger')
+const errorHandler = require('./middlewares/errorHandler')
+
 const app = express();
 
-app.use('/', routesLoader('api', __dirname + '/routes/api'))
+app.use('/',
+    loggerMiddleware,
+    express.json(),
+    routesLoader('api', __dirname + '/routes/api')
+)
 
-app.get('/status', (req, res) => {
-    res.json({
-        word: 33
-    })
+app.get('/status', (req, res, next) => {
+    try {
+        // TODO, should send {wordsNum, phrasalsNum, siteDescription}
+        res.json({
+            word: 33
+        })
+    } catch (err) {
+        next(err)
+    }
 })
 
 if (process.env.NODE_ENV === 'production') {
@@ -23,6 +36,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
+app.use('/', errorHandler)
 
 async function main() {
     await mongoose.connect(process.env.MONGODB_URL, {
