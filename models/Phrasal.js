@@ -1,8 +1,18 @@
 const mongoose = require('mongoose')
 
 const PhrasalSchema = new mongoose.Schema({
-    en: String,
-    pl: String,
+    en: {
+        type: String,
+        validate: {
+            validator: en => en.length > 1,
+            message: "English version must contain at least 2 characters"
+        },
+        required: [true, 'No english version of phrasal']
+    },
+    pl: {
+        type: String,
+        required: [true, 'No polish version of phrasal']
+    },
     example: String
 })
 
