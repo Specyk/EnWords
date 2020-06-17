@@ -13,8 +13,50 @@
   color: white;
 }
 
-.Nav .hiddenTree {
+.Nav ul {
+  display: flex;
+  height: 100%;
+}
+
+.Nav .hidden {
   display: none;
+}
+
+.SearchBox form {
+  display: flex;
+}
+
+.SearchBox input[type="submit"] {
+  width: 6em;
+}
+
+.Dropdown {
+  display: flex;
+  flex-direction: column;
+}
+
+.Dropdown .toogle {
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.Dropdown:hover .content {
+  display: flex;
+  width: 7em;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+}
+
+.Dropdown .content a {
+  margin: 0.5em 0;
+}
+
+.Dropdown .content {
+  position: absolute;
+  top: 3em;
 }
 
 .Nav a {
@@ -31,15 +73,6 @@
 
 .Nav li:hover {
   background-color: #001;
-}
-
-.Nav li.active {
-  background-color: #001;
-}
-
-.Nav > ul {
-  height: 100%;
-  display: flex;
 }
 
 .Nav ~ div {
@@ -91,13 +124,14 @@
   flex: 4;
 }
 
-.BrowseView .explanation {
+.BrowseView .definition {
   flex: 4;
 }
 
 .BrowseView .pl,
 .BrowseView .en {
-  flex: 1;
+  flex: 1.2;
+  padding: 0 0.1em;
 }
 
 .BrowseView ul {
@@ -120,4 +154,38 @@
   font-weight: 500;
   color: #ccf;
   text-align: center;
+}
+
+.BrowseView input {
+  background-color: #222;
+  color: white;
+  width: 100%;
+}
+
+.BrowseView li span {
+  padding: 0 0.5em;
+}
+
+.saveBtn {
+  cursor: pointer;
+  flex: 0.2;
+}
+
+.addNewBtn {
+  background-color: #222;
+  color: #ffc;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  margin-left: auto;
+}
+
+.AddNew {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.AddNew span {
+  display: flex;
 }
