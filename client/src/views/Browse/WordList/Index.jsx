@@ -35,9 +35,8 @@ export default class WordList extends Component {
     render() {
         return (
             <div>
-                <AddNew addNewHandler={this.addNewHandler}></AddNew>
                 <SearchBox searchHandler={this.searchHandler}></SearchBox>
-                <List words={this.state.words}></List>
+                <List words={this.state.words} addNewHandler={this.addNewHandler}></List>
             </div >
         )
     }

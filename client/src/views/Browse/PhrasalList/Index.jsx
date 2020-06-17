@@ -24,8 +24,9 @@ export default class PhrasalList extends Component {
         return res.data
     }
 
-    addNewHandler() {
+    addNewHandler = async (e) => {
 
+        axios.post('/api/phrasals', {})
     }
 
     searchHandler() {
@@ -35,9 +36,8 @@ export default class PhrasalList extends Component {
     render() {
         return (
             <div>
-                <AddNew addNewHandler={this.addNewHandler}></AddNew>
                 <SearchBox searchHandler={this.searchHandler}></SearchBox>
-                <List phrasals={this.state.phrasals}></List>
+                <List phrasals={this.state.phrasals} addNewHandler={this.addNewHandler}></List>
             </div >
         )
     }
