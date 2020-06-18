@@ -20,11 +20,11 @@ async function createPhrasal(newPhrasal) {
 }
 
 async function updatePhrasal(newPhrasal) {
-    await Phrasal.findOneAndUpdate({ _id: newPhrasal._id }, { newPhrasal })
+    await Phrasal.findOneAndUpdate({ _id: newPhrasal._id }, newPhrasal)
     return newPhrasal
 }
 
-async function updatePhrasal(phrasal) {
+async function deletePhrasal(phrasal) {
     await Phrasal.findOneAndDelete({ _id: phrasal._id })
     return newPhrasal
 }
@@ -74,7 +74,7 @@ app.put('/:id', async (req, res, next) => {
 app.delete('/:id', async (req, res, next) => {
     try {
         const deleted = await deletePhrasal(req.body.phrasal)
-        res.status(204).json(newPhrasal)
+        res.status(204).json(true)
     } catch (err) {
         next(err)
     }
