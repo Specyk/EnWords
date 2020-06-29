@@ -13,7 +13,7 @@ app.get('/', async (req, res, next) => {
 
 app.post('/', async (req, res, next) => {
     try {
-        const phrasal = await phrasalsService.createPhrasal(req.body.phrasal)
+        const phrasal = await phrasalsService.createPhrasal(req.body)
         res.status(201).json(phrasal)
     } catch (err) {
         if (err.errors) {
