@@ -4,6 +4,7 @@ const PORT = process.env.SERVER_PORT
 const mongoose = require('mongoose')
 const express = require("express");
 
+const keys = require('./config/keys')
 const routesLoader = require('./routes/loader')
 
 const loggerMiddleware = require('./middlewares/logger')
@@ -39,11 +40,11 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/', errorHandler)
 
 async function main() {
-    await mongoose.connect(process.env.MONGODB_URL, {
+    await mongoose.connect(keys.mongoURI, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
-    app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+    app.listen(PORT, () => console.log(`EnWords is listening on port ${PORT}`));
 }
 
 main().then(() => console.log('Application configured properly')).catch(err => console.log(`Application error: ${err}`))
