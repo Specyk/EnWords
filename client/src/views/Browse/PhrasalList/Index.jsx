@@ -11,10 +11,10 @@ export default class PhrasalList extends Component {
     }
 
     componentDidMount() {
-        this.update().then(() => { })
+        this.loadPhrasals().then(() => { })
     }
 
-    update = async () => {
+    loadPhrasals = async () => {
         const phrasals = await this.getPhrasals()
         this.setState({ phrasals })
     }
@@ -37,7 +37,7 @@ export default class PhrasalList extends Component {
         return (
             <div>
                 <SearchBox searchHandler={this.searchHandler}></SearchBox>
-                <List phrasals={this.state.phrasals} addNewHandler={this.addNewHandler}></List>
+                <List loadPhrasalsFn={this.loadPhrasals} phrasals={this.state.phrasals} addNewHandler={this.addNewHandler}></List>
             </div >
         )
     }

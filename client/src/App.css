@@ -189,3 +189,12 @@
 .AddNew span {
   display: flex;
 }
+
+.entry span:last-child {
+  color: #f55;
+  cursor: pointer;
+}
+
+.entry span:last-child:hover {
+  color: red;
+}

@@ -44,7 +44,7 @@ app.put('/:id', async (req, res, next) => {
 
 app.delete('/:id', async (req, res, next) => {
     try {
-        const deleted = await phrasalsService.deletePhrasal(req.body.phrasal)
+        const deleted = await phrasalsService.deletePhrasal(req.params.id)
         res.status(204).json(true)
     } catch (err) {
         next(err)

@@ -24,8 +24,7 @@ module.exports = {
         return newPhrasal
     },
 
-    deletePhrasal: async (phrasal) => {
-        await Phrasal.findOneAndDelete({ _id: phrasal._id })
-        return newPhrasal
+    deletePhrasal: async (id) => {
+        await Phrasal.findOneAndDelete({ _id: id })
     }
 }
