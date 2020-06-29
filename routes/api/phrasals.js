@@ -1,40 +1,11 @@
 const express = require('express')
-const Phrasal = require('../../models/Phrasal')
-
-async function getRandom() {
-    const count = await Phrasal.count()
-    const randomNum = Math.floor(Math.random() * count)
-    const randomItems = await Phrasal.find().skip(randomNum).limit(1)
-    return randomItems[0]
-}
-
-async function getAll() {
-    const items = Phrasal.find({})
-    return items
-}
-
-async function createPhrasal(newPhrasal) {
-    const phrasal = new Phrasal(newPhrasal)
-    await phrasal.save()
-    return phrasal
-}
-
-async function updatePhrasal(newPhrasal) {
-    await Phrasal.findOneAndUpdate({ _id: newPhrasal._id }, newPhrasal)
-    return newPhrasal
-}
-
-async function deletePhrasal(phrasal) {
-    await Phrasal.findOneAndDelete({ _id: phrasal._id })
-    return newPhrasal
-}
-
+const phrasalsService = require('../../services/phrasals')
 
 const app = express.Router()
 
 app.get('/', async (req, res, next) => {
     try {
-        res.json(await getAll())
+        res.json(await phrasalsService.getAll())
     } catch (err) {
         next(err)
     }
@@ -42,7 +13,7 @@ app.get('/', async (req, res, next) => {
 
 app.post('/', async (req, res, next) => {
     try {
-        const phrasal = await createPhrasal(req.body.phrasal)
+        const phrasal = await phrasalsService.createPhrasal(req.body.phrasal)
         res.status(201).json(phrasal)
     } catch (err) {
         if (err.errors) {
@@ -57,7 +28,7 @@ app.post('/', async (req, res, next) => {
 
 app.put('/:id', async (req, res, next) => {
     try {
-        const newPhrasal = await updatePhrasal(req.body.phrasal)
+        const newPhrasal = await phrasalsService.updatePhrasal(req.body.phrasal)
         res.status(201).json(newPhrasal)
     } catch (err) {
         if (err.errors) {
@@ -73,7 +44,7 @@ app.put('/:id', async (req, res, next) => {
 
 app.delete('/:id', async (req, res, next) => {
     try {
-        const deleted = await deletePhrasal(req.body.phrasal)
+        const deleted = await phrasalsService.deletePhrasal(req.body.phrasal)
         res.status(204).json(true)
     } catch (err) {
         next(err)
@@ -83,7 +54,7 @@ app.delete('/:id', async (req, res, next) => {
 
 app.get('/random', async (req, res, next) => {
     try {
-        const randPhrasal = await getRandom()
+        const randPhrasal = await phrasalsService.getRandom()
         res.json(randPhrasal)
     } catch (err) {
         next(err)
