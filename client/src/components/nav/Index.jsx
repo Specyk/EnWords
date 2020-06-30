@@ -30,7 +30,6 @@ export default function Nav(props) {
         { path: '/settings', label: 'Settings' },
     ]
 
-    const speechOptions = ["on", "off"]
     return (
         <div className="Nav">
             <ul className="global">

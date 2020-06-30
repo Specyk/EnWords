@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import SearchBox from '../SearchBox'
-import AddNew from './AddNew'
 import List from './List'
 
 export default class PhrasalList extends Component {
@@ -16,7 +15,7 @@ export default class PhrasalList extends Component {
 
     loadPhrasals = async () => {
         const phrasals = await this.getPhrasals()
-        this.setState({ phrasals })
+        this.setState({ phrasals, filteredPhrasals: null })
     }
 
     getPhrasals = async () => {

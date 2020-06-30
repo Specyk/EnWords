@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import SearchBox from '../SearchBox'
-import AddNew from './AddNew'
 import List from './List'
 
 export default class WordList extends Component {
@@ -11,12 +10,12 @@ export default class WordList extends Component {
     }
 
     componentDidMount() {
-        this.update().then(() => { })
+        this.loadWords().then(() => { })
     }
 
-    update = async () => {
+    loadWords = async () => {
         const words = await this.getWords()
-        this.setState({ words })
+        this.setState({ words, filteredWords: null })
     }
 
     getWords = async () => {
@@ -28,15 +27,18 @@ export default class WordList extends Component {
 
     }
 
-    searchHandler = () => {
-
+    searchHandler = (e) => {
+        const phrase = e.target.value
+        const entryFilter = entry => entry.en.indexOf(phrase) > -1 || entry.pl.indexOf(phrase) > -1 || entry.example.indexOf(phrase) > -1 || entry.definition.indexOf(phrase) > -1
+        const filtered = this.state.words.filter(entryFilter)
+        this.setState({ filteredWords: filtered })
     }
 
     render() {
         return (
             <div>
                 <SearchBox searchHandler={this.searchHandler}></SearchBox>
-                <List words={this.state.words} addNewHandler={this.addNewHandler}></List>
+                <List loadWordsFn={this.loadWords} words={this.state.filteredWords || this.state.words} addNewHandler={this.addNewHandler}></List>
             </div >
         )
     }
