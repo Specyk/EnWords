@@ -2,7 +2,7 @@ const Phrasal = require('../models/Phrasal')
 
 module.exports = {
     getRandom: async () => {
-        const count = await Phrasal.count()
+        const count = await Phrasal.countDocuments()
         const randomNum = Math.floor(Math.random() * count)
         const randomItems = await Phrasal.find().skip(randomNum).limit(1)
         return randomItems[0]

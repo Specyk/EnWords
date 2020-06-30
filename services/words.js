@@ -2,7 +2,7 @@ const Word = require('../models/Word')
 
 module.exports = {
     getRandom: async () => {
-        const count = await Word.count()
+        const count = await Word.countDocuments()
         const randomNum = Math.floor(Math.random() * count)
         const randomItems = await Word.find().skip(randomNum).limit(1)
         return randomItems[0]
