@@ -20,28 +20,24 @@ function createRoutesMap(rootPath) {
     }
 }
 
-function loadRoutes(router, root, routesMap) {
-    routesMap.forEach((routePath, routeName) => {
+function loadRoutes(router, routesMap) {
+    routesMap.forEach((routerMdlPath, routeName) => {
         try {
-            let mod = require(routePath)
-            // console.dir(mod);
-            // console.log(`${routeName} : ${typeof mod.default}`)
-            let urlRoute = `/${root}/${routeName}`;
-            urlRoute = cleanUp(urlRoute)
-            // console.log(urlRoute)
-            router.use(urlRoute, mod)
+            let mdl = require(routerMdlPath)
+            const routePath = `/${routeName}`
+            router.use(routePath, mdl)
         } catch (err) {
             throw err
         }
     })
 }
 
-function routesLoader(root, directory) {
+function routesLoader(directory) {
     let mainRouter = express.Router(),
         routesMap
     try {
         routesMap = createRoutesMap(directory)
-        loadRoutes(mainRouter, root, routesMap)
+        loadRoutes(mainRouter, routesMap)
     } catch (err) {
         throw err
     }

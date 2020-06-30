@@ -15,8 +15,9 @@ const app = express();
 app.use('/',
     loggerMiddleware,
     express.json(),
-    routesLoader('api', __dirname + '/routes/api')
 )
+
+app.use('/api', routesLoader(__dirname + '/routes/api'))
 
 app.get('/status', (req, res, next) => {
     try {
