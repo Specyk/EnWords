@@ -6,7 +6,16 @@
   "scripts": {
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "test": "jest ",
+    "test:watch": "jest  --watch",
+    "test:coverage": "jest  --coverage"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/.*/__mocks__"
+    ]
   },
   "dependencies": {
     "dotenv": "^8.2.0",
@@ -17,6 +26,7 @@
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
+    "jest": "24.9.0",
     "nodemon": "^2.0.4"
   }
 }
