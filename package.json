@@ -1,7 +1,7 @@
 {
   "name": "enwords-server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
   "scripts": {
     "client": "cd client && yarn start",
