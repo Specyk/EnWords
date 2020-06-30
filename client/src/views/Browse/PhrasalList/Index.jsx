@@ -29,15 +29,18 @@ export default class PhrasalList extends Component {
         axios.post('/api/phrasals', {})
     }
 
-    searchHandler() {
-
+    searchHandler = (e) => {
+        const phrase = e.target.value
+        const entryFilter = entry => entry.en.indexOf(phrase) > -1 || entry.pl.indexOf(phrase) > -1 || entry.example.indexOf(phrase) > -1
+        const filtered = this.state.phrasals.filter(entryFilter)
+        this.setState({ filteredPhrasals: filtered })
     }
 
     render() {
         return (
             <div>
                 <SearchBox searchHandler={this.searchHandler}></SearchBox>
-                <List loadPhrasalsFn={this.loadPhrasals} phrasals={this.state.phrasals} addNewHandler={this.addNewHandler}></List>
+                <List loadPhrasalsFn={this.loadPhrasals} phrasals={this.state.filteredPhrasals || this.state.phrasals} addNewHandler={this.addNewHandler}></List>
             </div >
         )
     }
