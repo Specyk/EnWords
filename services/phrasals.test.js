@@ -20,21 +20,6 @@ describe('phrasalsService', () => {
         }
     ]
 
-    const wordSamples = [
-        {
-            pl: 'obelga, upokarzająca uwaga',
-            en: 'put-down',
-            definition: '[noun] - an unkind remark that makes somebody seem silly',
-            example: "She couldn't stand his put-downs any more."
-        },
-        {
-            pl: 'niewola',
-            en: 'captivity',
-            definition: '[noun] - the situation in which a person or animal is kept somewhere and is not allowed to leave',
-            example: 'All the hostages were released from captivity.'
-        }
-    ]
-
     beforeAll(async () => {
         await mongoose.connect('mongodb://localhost/enwords_test')
         await clearDb()
@@ -101,9 +86,4 @@ describe('phrasalsService', () => {
         expect(obtainedPhrasal).toBeNull()
     })
 
-
 })
-
-//                 deletePhrasal: async (id) => {
-//                     await Phrasal.findOneAndDelete({ _id: id })
-//                 }
