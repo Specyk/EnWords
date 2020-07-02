@@ -1,4 +1,4 @@
-const PhrasalsService = require('./phrasals')
+const phrasalsService = require('./phrasals')
 const Phrasal = require('../models/Phrasal')
 const Word = require('../models/Word')
 const mongoose = require('mongoose')
@@ -45,8 +45,8 @@ describe('phrasalsService', () => {
         await mongoose.connection.close()
     })
 
-    test('getRandom should return an object with en, pl, example string fields', async () => {
-        const random = await PhrasalsService.getRandom()
+    test('getRandom() should return an object with en, pl, example string fields', async () => {
+        const random = await phrasalsService.getRandom()
         expect(random).toEqual(expect.objectContaining({
             en: expect.any(String),
             pl: expect.any(String),
@@ -54,8 +54,8 @@ describe('phrasalsService', () => {
         }))
     })
 
-    test('getAll should return array of 10 phrasal objects', async () => {
-        const obtainedEntries = await PhrasalsService.getAll()
+    test('getAll() should return array of 10 phrasal objects', async () => {
+        const obtainedEntries = await phrasalsService.getAll()
         expect(obtainedEntries.length).toBe(10)
         expect(obtainedEntries).toContainEqual(expect.objectContaining({
             en: expect.any(String),
@@ -64,31 +64,45 @@ describe('phrasalsService', () => {
         }))
     })
 
+    test('createPhrasal() should add new phrasal to phrasals collection', async () => {
+        const newPhrasalData = {
+            en: 'english phrasal',
+            pl: 'polska wersja',
+            example: 'example of use'
+        }
+        await phrasalsService.createPhrasal(newPhrasalData)
+        const obtainedPhrasal = await Phrasal.findOne(newPhrasalData)
+        expect(obtainedPhrasal).toEqual(expect.objectContaining(newPhrasalData))
+    })
+
+    test('updatePhrasal() should update specified phrasal document in database', async () => {
+        let samplePhrasal = new Phrasal(phrasalSamples[0])
+        await samplePhrasal.save()
+
+        const updatedContent = {
+            example: 'another example'
+        }
+        await phrasalsService.updatePhrasal(samplePhrasal._id, updatedContent)
+        samplePhrasal = await Phrasal.findOne({ _id: samplePhrasal._id })
+        expect(samplePhrasal.example).toBe(updatedContent.example)
+    })
+
+    test('deletePhrasal() should delete specified phrasal document ', async () => {
+        const myPhrasalData = {
+            en: 'english ver',
+            pl: 'polska wer',
+            example: 'example of use'
+        }
+
+        const ph = new Phrasal(myPhrasalData)
+        await ph.save()
+        await phrasalsService.deletePhrasal(ph._id)
+        const obtainedPhrasal = await Phrasal.findOne({ en: 'english ver' })
+        expect(obtainedPhrasal).toBeNull()
+    })
+
+
 })
-
-
-// getRandom: async () => {
-//     const count = await Phrasal.countDocuments()
-//     const randomNum = Math.floor(Math.random() * count)
-//     const randomItems = await Phrasal.find().skip(randomNum).limit(1)
-//     return randomItems[0]
-// },
-
-//     getAll: async () => {
-//         const items = Phrasal.find({})
-//         return items
-//     },
-
-//         createPhrasal: async (newPhrasal) => {
-//             const phrasal = new Phrasal(newPhrasal)
-//             await phrasal.save()
-//             return phrasal
-//         },
-
-//             updatePhrasal: async (newPhrasal) => {
-//                 await Phrasal.findOneAndUpdate({ _id: newPhrasal._id }, newPhrasal)
-//                 return newPhrasal
-//             },
 
 //                 deletePhrasal: async (id) => {
 //                     await Phrasal.findOneAndDelete({ _id: id })
