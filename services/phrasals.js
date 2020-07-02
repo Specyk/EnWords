@@ -19,8 +19,8 @@ module.exports = {
         return phrasal
     },
 
-    updatePhrasal: async (newPhrasal) => {
-        await Phrasal.findOneAndUpdate({ _id: newPhrasal._id }, newPhrasal)
+    updatePhrasal: async (id, newPhrasal) => {
+        await Phrasal.findOneAndUpdate({ _id: id }, newPhrasal)
         return newPhrasal
     },
 
