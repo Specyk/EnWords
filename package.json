@@ -12,7 +12,7 @@
     "test:coverage": "jest  --coverage"
   },
   "jest": {
-    "testEnvironment": "jsdom",
+    "testEnvironment": "node",
     "modulePathIgnorePatterns": [
       "<rootDir>/.*/__mocks__",
       "<rootDir>/client/*"
