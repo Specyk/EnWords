@@ -117,8 +117,7 @@ const phrasals = [
     }
 ]
 
-module.exports = async () => {
-    const phrasalModels = phrasals.map(p => new Phrasal(p).save())
-    const wordModels = words.map(w => new Word(w).save())
-    await Promise.all([...phrasalModels, ...wordModels])
+module.exports = {
+    phrasals: async () => await Promise.all(phrasals.map(p => new Phrasal(p).save())),
+    words: async () => await Promise.all(words.map(w => new Word(w).save()))
 }
