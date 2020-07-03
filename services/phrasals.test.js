@@ -1,27 +1,12 @@
-const phrasalsService = require("./phrasals")
+const phrasalService = require("./phrasals")
 const Phrasal = require("../models/Phrasal")
-const Word = require("../models/Word")
 const mongoose = require("mongoose")
 
 const helper = require("../test/helper")
 const seedData = require("../test/seedData")
-
-clearDb = async () =>
-  Promise.all([Phrasal.deleteMany({}), Word.deleteMany({})])
+const phrasalSamples = require('../test/sampleData').phrasals
 
 describe("phrasalsService", () => {
-  const phrasalSamples = [
-    {
-      pl: "być przepełnionym",
-      en: "brim over",
-      example: "Susan was brimming over with excitement.",
-    },
-    {
-      pl: "trzymać kogoś w ryzach, zmuszać do posłuszeństwa",
-      en: "keep sb under",
-      example: "The people from the village are kept under by the army.",
-    },
-  ]
 
   beforeAll(async () => {
     await helper.connectDb()
@@ -34,7 +19,7 @@ describe("phrasalsService", () => {
   })
 
   test("getRandom() should return an object with en, pl, example string fields", async () => {
-    const random = await phrasalsService.getRandom()
+    const random = await phrasalService.getRandom()
     expect(random).toEqual(
       expect.objectContaining({
         en: expect.any(String),
@@ -45,7 +30,7 @@ describe("phrasalsService", () => {
   })
 
   test("getAll() should return array of 10 phrasal objects", async () => {
-    const obtainedEntries = await phrasalsService.getAll()
+    const obtainedEntries = await phrasalService.getAll()
     expect(obtainedEntries.length).toBe(10)
     expect(obtainedEntries).toContainEqual(
       expect.objectContaining({
@@ -62,7 +47,7 @@ describe("phrasalsService", () => {
       pl: "polska wersja",
       example: "example of use",
     }
-    await phrasalsService.createPhrasal(newPhrasalData)
+    await phrasalService.createPhrasal(newPhrasalData)
     const obtainedPhrasal = await Phrasal.findOne(newPhrasalData)
     expect(obtainedPhrasal).toEqual(expect.objectContaining(newPhrasalData))
   })
@@ -74,7 +59,7 @@ describe("phrasalsService", () => {
     const updatedContent = {
       example: "another example",
     }
-    await phrasalsService.updatePhrasal(samplePhrasal._id, updatedContent)
+    await phrasalService.updatePhrasal(samplePhrasal._id, updatedContent)
     samplePhrasal = await Phrasal.findOne({ _id: samplePhrasal._id })
     expect(samplePhrasal.example).toBe(updatedContent.example)
   })
@@ -88,7 +73,7 @@ describe("phrasalsService", () => {
 
     const ph = new Phrasal(myPhrasalData)
     await ph.save()
-    await phrasalsService.deletePhrasal(ph._id)
+    await phrasalService.deletePhrasal(ph._id)
     const obtainedPhrasal = await Phrasal.findOne({ en: "english ver" })
     expect(obtainedPhrasal).toBeNull()
   })
