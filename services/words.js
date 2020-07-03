@@ -19,8 +19,8 @@ module.exports = {
         return word
     },
 
-    updateWord: async (newWord) => {
-        await Word.findOneAndUpdate({ _id: newWord._id }, newWord)
+    updateWord: async (id, newWord) => {
+        await Word.findOneAndUpdate({ _id: id }, newWord)
         return newWord
     },
 
